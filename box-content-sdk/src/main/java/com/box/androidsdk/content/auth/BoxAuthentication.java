@@ -192,6 +192,14 @@ public class BoxAuthentication {
         getAuthInfoMap(session.getApplicationContext());
         BoxAuthenticationInfo info = mCurrentAccessInfo.get(userId);
 
+        mCurrentAccessInfo.remove(userId);
+        String lastUserId = authStorage.getLastAuthentictedUserId(context);
+        if (lastUserId != null && userId.equals(userId)){
+            authStorage.storeLastAuthenticatedUserId(null, context);
+        }
+        authStorage.storeAuthInfoMap(mCurrentAccessInfo, context);
+        onLoggedOut(info, null);
+
         try {
             BoxApiAuthentication.BoxRevokeAuthRequest request = new BoxApiAuthentication.BoxRevokeAuthRequest(session, info.refreshToken(), session.getClientId(), session.getClientSecret());
             request.send();
@@ -200,12 +208,6 @@ public class BoxAuthentication {
             // Do nothing as we want to continue wiping auth info
         }
         info.wipeOutAuth();
-        mCurrentAccessInfo.remove(userId);
-        String lastUserId = authStorage.getLastAuthentictedUserId(context);
-        if (lastUserId != null && userId.equals(userId)){
-            authStorage.storeLastAuthenticatedUserId(null, context);
-        }
-        authStorage.storeAuthInfoMap(mCurrentAccessInfo, context);
     }
 
     /**

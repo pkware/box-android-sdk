@@ -403,6 +403,11 @@ public class BoxSession extends BoxObject implements BoxAuthentication.AuthListe
             } else if (sessionAuthListener != null) {
                 sessionAuthListener.onLoggedOut(info, ex);
             }
+            // if there are sessions in memory we need to wipe out their info as well.
+            setUserId(null);
+            if (getAuthInfo() != null) {
+                getAuthInfo().wipeOutAuth();
+            }
         }
     }
 
