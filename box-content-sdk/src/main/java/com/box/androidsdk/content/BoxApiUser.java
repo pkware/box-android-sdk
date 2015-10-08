@@ -43,48 +43,4 @@ public class BoxApiUser extends BoxApi {
             BoxRequestsUser.GetUserInfo request = new BoxRequestsUser.GetUserInfo(getUserInformationUrl("me"), mSession);
         return request;
     }
-
-    /**
-     * Gets a request that gets information about a user
-     *
-     * @param id    id of the user to get information on
-     * @return request to get information about a user
-     */
-    public BoxRequestsUser.GetUserInfo getUserInfoRequest(String id) {
-        BoxRequestsUser.GetUserInfo request = new BoxRequestsUser.GetUserInfo(getUserInformationUrl(id), mSession);
-        return request;
-    }
-
-    /**
-     * Gets a request that gets all the users of an enterprise
-     * The session provided must be associated with an enterprise admin user
-     *
-     * @return request to get all users of an enterprise
-     */
-    public BoxRequestsUser.GetEnterpriseUsers getEnterpriseUsersRequest() {
-        BoxRequestsUser.GetEnterpriseUsers request = new BoxRequestsUser.GetEnterpriseUsers(getUsersUrl(), mSession);
-        return request;
-    }
-
-    /**
-     * Gets a request that creates an enterprise user
-     * The session provided must be associated with an enterprise admin user
-     *
-     * @return request to create an enterprise user
-     */
-    public BoxRequestsUser.CreateEnterpriseUser getCreateEnterpriseUserRequest(String login, String name) {
-        BoxRequestsUser.CreateEnterpriseUser request = new BoxRequestsUser.CreateEnterpriseUser(getUsersUrl(), mSession, login, name);
-        return request;
-    }
-
-    /**
-     * Gets a request that deletes an enterprise user
-     * The session provided must be associated with an enterprise admin user
-     *
-     * @return request to delete an enterprise user
-     */
-    public BoxRequestsUser.DeleteEnterpriseUser getDeleteEnterpriseUserRequest(String userId) {
-        BoxRequestsUser.DeleteEnterpriseUser request = new BoxRequestsUser.DeleteEnterpriseUser(getUserInformationUrl(userId), mSession, userId);
-        return request;
-    }
 }

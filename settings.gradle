@@ -1,1 +1,1 @@
-include ':box-content-sample', ':box-content-sdk'
+include ':box-content-sdk'
